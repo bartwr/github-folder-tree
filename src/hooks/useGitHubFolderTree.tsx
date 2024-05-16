@@ -29,7 +29,7 @@ export const useGitHubFolderTree = (folderUrl: string, apiKey?: string) => {
 
       if (!matches) {
         setError('Invalid GitHub folder URL')
-        return
+        return;
       }
 
       const user = matches[1]
@@ -47,7 +47,7 @@ export const useGitHubFolderTree = (folderUrl: string, apiKey?: string) => {
       setLog('Folder data fetched')
 
       const processedFiles = await processFolderContents(folderData, setError, setLog, dir, apiKey)
-      setRepoFiles(prevFiles => [...prevFiles, ...processedFiles].filter(Boolean) as RepoFile[])
+      setRepoFiles(prevFiles => processedFiles.filter(Boolean) as RepoFile[])
     } catch (error: any) {
       setError(error.response?.data?.message)
     }
